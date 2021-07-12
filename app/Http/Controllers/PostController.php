@@ -56,7 +56,6 @@ class PostController extends Controller
             ->latest('id')
             ->take(4)
             ->get();
-        // dd($post->image->count());
         return view('posts.show', compact('post', 'similares'));
     }
 

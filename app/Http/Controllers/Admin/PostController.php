@@ -99,6 +99,11 @@ class PostController extends Controller
         $this->authorize('author', $post);
         $categories = Category::pluck('name', 'id');
         $tags = Tag::all();
+        // dd($post->image);
+        // dd($post->image)
+        // foreach($post->image as $image){
+        //     dd($image);
+        // }
         return view('admin.posts.edit', compact('categories', 'tags', 'post'));
     }
 

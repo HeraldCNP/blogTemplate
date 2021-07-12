@@ -51,11 +51,19 @@
 <div class="row mb-3">
     <div class="col-md-6">
         <div class="image-wrapper">
-            @isset ($post->image)
-                <img id="picture" src="{{ Storage::url($post->image->url) }}" alt="">7
+            @if ($post->image->count() > 1)
+                <div class="">
+                    @foreach ($post->image as $image)
+                        <a href="{{ Storage::url($image->url) }}" data-toggle="lightbox" data-gallery="example-gallery">
+                            <img src="{{ Storage::url($image->url) }}" class="img-fluid">
+                        </a>
+                    @endforeach
+                </div>
             @else
-                <img id="picture" src="https://cdn.pixabay.com/photo/2020/01/03/11/44/freedom-4737919_960_720.jpg" alt="">
-            @endisset
+                <a href="{{ Storage::url($post->image[0]->url) }}" data-toggle="lightbox">
+                    <img src="{{ Storage::url($post->image[0]->url) }}" class="img-fluid">
+                </a>
+            @endif
         </div>
 
     </div>

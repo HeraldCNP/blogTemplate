@@ -7,16 +7,16 @@
 @stop
 
 @section('content')
-@if (session('info'))
-    <div class="alert alert-success">
-        <strong>{{ session('info') }}</strong>
-    </div>
-@endif
+    @if (session('info'))
+        <div class="alert alert-success">
+            <strong>{{ session('info') }}</strong>
+        </div>
+    @endif
     <div class="card">
         <div class="card-body">
             {!! Form::model($post, ['route' => ['admin.posts.update', $post], 'autocomplete' => 'off', 'files' => 'true', 'method' => 'PUT']) !!}
-                @include('Admin.posts.partials.form')
-                {!! Form::submit('Actualizar Post', ['class' => 'btn btn-primary']) !!}
+            @include('Admin.posts.partials.form')
+            {!! Form::submit('Actualizar Post', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
 
@@ -25,24 +25,32 @@
 
 @section('css')
     <style>
-        .image-wrapper{
+        .image-wrapper {
             position: relative;
             padding-bottom: 56.25%;
         }
-        .image-wrapper img{
+
+        .image-wrapper img {
             position: absolute;
             object-fit: cover;
             width: 100%;
             height: 100%;
         }
+
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css"
+        integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @stop
 
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
+        integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/27.0.0/classic/ckeditor.js"></script>
     <script src="{{ asset('vendor/jQuery-Plugin-stringToSlug-1.3/jquery.stringToSlug.min.js') }}"></script>
     <script>
-        $(document).ready( function() {
+        $(document).ready(function() {
             $("#name").stringToSlug({
                 setEvents: 'keyup keydown blur',
                 getPut: '#slug',
@@ -50,20 +58,20 @@
             });
         });
         ClassicEditor
-        .create( document.querySelector( '#extract' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+            .create(document.querySelector('#extract'))
+            .catch(error => {
+                console.error(error);
+            });
         ClassicEditor
-        .create( document.querySelector( '#body' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+            .create(document.querySelector('#body'))
+            .catch(error => {
+                console.error(error);
+            });
 
         //Cambiar imagen
         document.getElementById("file").addEventListener('change', cambiarImagen);
 
-        function cambiarImagen(event){
+        function cambiarImagen(event) {
             var file = event.target.files[0];
 
             var reader = new FileReader();
@@ -74,4 +82,11 @@
             reader.readAsDataURL(file);
         }
     </script>
+    <script>
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+    </script>
+
 @endsection
