@@ -9,11 +9,24 @@
 @section('content')
     <div class="card">
         <div class="card-body">
+            <b>Imagenes:</b>
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="/file-upload"
+                    class="dropzone"
+                    id="my-awesome-dropzone"></form>
+                </div>
+                <div class="col-md-6">
+                    
+                </div>
+            </div>
+            
             {!! Form::open(['route' => 'admin.posts.store', 'autocomplete' => 'off', 'files' => 'true']) !!}
                 @include('Admin.posts.partials.form')
                 {!! Form::submit('Crear Post', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
+        
     </div>
 @stop
 
@@ -30,7 +43,8 @@
             height: 100%;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- dropzone --}}
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @stop
 
 @section('js')
@@ -55,20 +69,21 @@
             console.error( error );
         } );
 
-        //Cambiar imagen
-        document.getElementById("file").addEventListener('change', cambiarImagen);
+        // //Cambiar imagen
+        // document.getElementById("file").addEventListener('change', cambiarImagen);
 
-        function cambiarImagen(event){
-            var file = event.target.files[0];
+        // function cambiarImagen(event){
+        //     var file = event.target.files[0];
 
-            var reader = new FileReader();
-            reader.onload = (event) => {
-                document.getElementById("picture").setAttribute('src', event.target.result);
-            };
+        //     var reader = new FileReader();
+        //     reader.onload = (event) => {
+        //         document.getElementById("picture").setAttribute('src', event.target.result);
+        //     };
 
-            reader.readAsDataURL(file);
-        }
+        //     reader.readAsDataURL(file);
+        // }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- Dropzone --}}
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 @endsection
 

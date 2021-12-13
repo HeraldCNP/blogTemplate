@@ -74,7 +74,6 @@ class PostController extends Controller
             $post->tags()->attach($request->tags);
         }
         return redirect()->route('admin.posts.edit', $post);
-
     }
 
     /**
@@ -157,4 +156,6 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('admin.posts.index')->with('info', 'El Post se elimino con exito');
     }
+
+
 }

@@ -50,24 +50,7 @@
 
 <div class="row mb-3">
     <div class="col-md-6">
-        <div class="image-wrapper">
-            @if ($post->image->count() > 1)
-                <div class="">
-                    @foreach ($post->image as $image)
-                        <a href="{{ Storage::url($image->url) }}" data-toggle="lightbox" data-gallery="example-gallery">
-                            <img src="{{ Storage::url($image->url) }}" class="img-fluid">
-                        </a>
-                    @endforeach
-                </div>
-            @else
-                <a href="{{ Storage::url($post->image[0]->url) }}" data-toggle="lightbox">
-                    <img src="{{ Storage::url($post->image[0]->url) }}" class="img-fluid">
-                </a>
-            @endif
-        </div>
-
-    </div>
-    <div class="col-md-6">
+        
         <div class="form-group">
             {!! Form::label('file', 'Imagen del Post') !!}
             {!! Form::file('file[]', ['class' => 'form-control-file', 'accept' => 'image/*', 'multiple']) !!}
@@ -77,6 +60,27 @@
         </div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad laboriosam debitis cumque, odio error repellendus ipsam eos. Tenetur modi molestiae voluptatibus iusto quisquam! Quidem blanditiis quae quasi molestias placeat quos?</p>
     </div>
+    <div class="col-md-6">
+        <div class="image-wrapper">
+            @isset($post->image)
+                @if ($post->image->count() > 1)
+                    <div class="">
+                        @foreach ($post->image as $image)
+                            <a href="{{ Storage::url($image->url) }}" data-toggle="lightbox" data-gallery="example-gallery">
+                                <img src="{{ Storage::url($image->url) }}" class="img-fluid">
+                            </a>
+                        @endforeach
+                    </div>
+                @else
+                    <a href="{{ Storage::url($post->image[0]->url) }}" data-toggle="lightbox">
+                        <img src="{{ Storage::url($post->image[0]->url) }}" class="img-fluid">
+                    </a>
+                @endif
+            @endisset
+        </div>
+
+    </div>
+    
 </div>
 <div class="form-group">
     {!! Form::label('iframe', 'Iframe') !!}
